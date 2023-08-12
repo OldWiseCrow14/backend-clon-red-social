@@ -1,6 +1,6 @@
 const {body,} = require('express-validator')
 
-const user_storage = [
+const userStorage = [
     body('username')
         .trim()
         .isLength({min:3, max:15})
@@ -23,4 +23,4 @@ const user_storage = [
 
 ]
 
-module.exports = user_storage
+module.exports = userStorage

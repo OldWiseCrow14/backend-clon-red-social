@@ -16,7 +16,11 @@ const mongodbconnect=async(param)=>{
         await client.connect()
         conectioncloninstadb=client
         await param()
-        console.log('You have been connected succesfully!!')
+        console.log(`
+            #########################
+                C O N E C T E D!
+            #########################
+        `)
     } catch (error) {
         console.error(error.stack)
         throw error

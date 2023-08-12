@@ -15,9 +15,34 @@ class User {
             return result
         } catch (error) {
             console.error('Err -- model User -- method createUser.')
-            console.log(error)
             throw error
 
+        }
+    }
+    static async checkEmail({ email }) {
+        try {
+            const query = { email }
+            const options = {
+                projection: { email: 1 },
+            }
+            const result = await db().collection('usuarios').findOne(query, options)
+            return result
+        } catch (error) {
+            console.error("ERR -- model User -- method checkEmail")
+            throw error
+        }
+    }
+    static async login({ username }) {
+        try {
+            const query = { username }
+            const options = {
+                projection: { password: 1 },
+            }
+            const result = await db().collection('usuarios').findOne(query, options)
+            return result
+        } catch (error) {
+            console.error("ERR -- model User -- method login")
+            throw error
         }
     }
 }
