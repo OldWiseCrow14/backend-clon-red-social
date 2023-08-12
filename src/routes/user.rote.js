@@ -10,7 +10,7 @@ const loginUser = require('../controllers/login')
 const router = Router()
 
 router.post('/users', validatormiddleware(validUsers),createuser)
-router.post('/login', validator(loginValidator), loginUser)
+router.post('/login', validatormiddleware(loginValidator), loginUser)
 
 module.exports = router
 
