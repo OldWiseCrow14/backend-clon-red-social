@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb')
 const {db} = require('../database/connection')
 
 class User {
@@ -42,6 +43,46 @@ class User {
             return result
         } catch (error) {
             console.error("ERR -- model User -- method login")
+            throw error
+        }
+    }
+    static async readUser({ _id }) {
+        try {
+            const result = await db().collection('usuarios').aggregate([
+                {
+                    $match: { _id: new ObjectId(_id) }
+                },
+                {
+                    $project: {
+                      username: 1,
+                      nombre: 1,
+                      descripcion: 1,
+                      followersCount: { $size: '$followers' },
+                      followingCount: { $size: '$following' },
+                      descripción: 1
+                    }
+                }
+            ]).toArray()
+            return result
+        } catch (error) {
+            console.error("ERR -- model User -- method readUser")
+            throw error
+        }
+    }
+    static async readSuggestions() {
+        try {
+            const result = await db().collection('usuarios').aggregate([
+                { $sample: { size: 10 } },
+                {
+                    $project: {
+                        username: 1,
+                        photo: 1
+                    }
+                }
+            ]).toArray()
+            return result
+        } catch (error) {
+            console.error("ERR -- model User -- method readSuggestions")
             throw error
         }
     }
