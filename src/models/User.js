@@ -25,7 +25,7 @@ class User {
             const options = {
                 projection: { email: 1 },
             }
-            const result = await db().collection('usuarios').findOne(query, options)
+            const result = await db().collection('User').findOne(query, options)
             return result
         } catch (error) {
             console.error("ERR -- model User -- method checkEmail")
@@ -38,7 +38,7 @@ class User {
             const options = {
                 projection: { password: 1 },
             }
-            const result = await db().collection('usuarios').findOne(query, options)
+            const result = await db().collection('User').findOne(query, options)
             return result
         } catch (error) {
             console.error("ERR -- model User -- method login")
