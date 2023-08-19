@@ -48,7 +48,7 @@ class User {
     }
     static async readUser({ _id }) {
         try {
-            const result = await db().collection('usuarios').aggregate([
+            const result = await db().collection('User').aggregate([
                 {
                     $match: { _id: new ObjectId(_id) }
                 },
@@ -71,7 +71,7 @@ class User {
     }
     static async readSuggestions() {
         try {
-            const result = await db().collection('usuarios').aggregate([
+            const result = await db().collection('User').aggregate([
                 { $sample: { size: 10 } },
                 {
                     $project: {
